@@ -9,7 +9,9 @@ html {
 }
 
 body {
-  background: #202020;
+  background: #1F1F1F;
+  color: #F0F0F0;
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,11 +20,22 @@ body {
   height: 100%;
 }
 
+button {
+  background: #F0F0F0;
+  color: #1F1F1F;
+  font-size: 1em;
+  font-weight: bold;
+  width: 130px;
+  height: 50px;
+  border: 5px outset #7F7F7F;
+}
+
 div#board {
   display: flex;
   flex-direction: column;
-  width: 640px;
-  height: 640px;
+  width: 660px;
+  height: 660px;
+  border: 10px inset #7F7F7F;
 }
 
 div.row {
@@ -33,4 +46,9 @@ div.row {
 div.square {
   background: #FFFFFF;
   flex: 1 0 1px;
+}
+
+div.buttons {
+  display: flex;
+  gap: 40px;
 }
