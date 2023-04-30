@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
 
 html {
@@ -17,9 +19,8 @@ body {
 div#board {
   display: flex;
   flex-direction: column;
-  width: 512px;
-  height: 512px;
-  padding: 0px;
+  width: 640px;
+  height: 640px;
 }
 
 div.row {
