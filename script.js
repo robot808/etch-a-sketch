@@ -33,12 +33,22 @@ function changeColor (event) {
   square.style.backgroundColor = "#000000";
 }
 
-const redrawButton = document.querySelector("#redraw");
 // redraw board based on user input height and width in squares
-redrawButton.addEventListener("click", () => {
-  const squares = prompt("How many squares high and wide would you like the board to be?");
+function redrawBoard () {
+  let squares = prompt(
+    "Please enter an integer between 1 and 100 (default 16)", "16"
+  );
+
+  // validate user input and convert to Number
+  while (!(squares = Number(squares)) || squares < 1 || squares > 100) {
+    squares = prompt("Error: Please enter an integer between 1 and 100", "16");
+  }
+  
   clearBoard();
   drawBoard(squares);
-});
+}
+
+const redrawButton = document.querySelector("#redraw");
+redrawButton.addEventListener("click", redrawBoard);
 
 drawBoard(16); // initial board
