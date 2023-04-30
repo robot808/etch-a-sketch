@@ -1,6 +1,5 @@
 // remove all children of board div
 function clearBoard () {
-  const board = document.querySelector("#board");
   while (board.hasChildNodes()) {
     board.removeChild(board.firstChild);
   }
@@ -8,8 +7,6 @@ function clearBoard () {
 
 // given number of squares high and wide, draw a squares by squares grid of divs
 function drawBoard (squares) {
-  const board = document.querySelector("#board");
-
   // rows
   for (let i = 0; i < squares; i++) {
     const row = document.createElement("div");
@@ -19,18 +16,12 @@ function drawBoard (squares) {
     for (let j = 0; j < squares; j++) {
       const square = document.createElement("div");
       square.classList.add("square");
-      square.addEventListener("mouseover", changeColor);
+      square.addEventListener("mouseover", currentMode);
       row.appendChild(square);
     }
 
     board.appendChild(row);
   }
-}
-
-// given an event, change the background color of the target square div
-function changeColor (event) {
-  const square = event.target;
-  square.style.backgroundColor = "#000000";
 }
 
 // redraw board based on user input height and width in squares
@@ -48,7 +39,54 @@ function redrawBoard () {
   drawBoard(squares);
 }
 
-const redrawButton = document.querySelector("#redraw");
-redrawButton.addEventListener("click", redrawBoard);
+// given an event, change the background color of the target square div
+function paintBlack (event) {
+  const square = event.target;
+  square.style.backgroundColor = "#000000";
+}
+
+// given a mode button's click event, change paint mode accordingly
+function changeMode (event) {
+  let newMode;
+
+  // given clicked button's id, determine which function should be used
+  switch (event.target.id) {
+    case "normal":
+      newMode = paintBlack;
+      break;
+    case "gradient":
+      newMode = paintDarken;
+      break;
+    case "rainbow":
+      newMode = paintRandom;
+      break;
+    default:
+      return;
+  }
+
+  // for each square div, remove old event listener and add a new one
+  board.child.foreach(row => {
+    row.children.foreach(square => {
+      square.removeEventListener("mouseover", currentMode);
+      square.addEventListener("mouseover", newMode);
+    });
+  });
+
+  // keep track of most recent mode
+  currentMode = newMode;
+}
+
+const board = document.querySelector("#board");
+const buttons = document.querySelector("div.buttons");
+let currentMode = paintBlack;
+
+buttons.childNodes.forEach(button => {
+  if (button.id === "redraw") {
+    button.addEventListener("click", redrawBoard);
+  }
+  else {
+    button.addEventListener("click", changeMode);
+  }
+});
 
 drawBoard(16); // initial board
