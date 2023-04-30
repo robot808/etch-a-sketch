@@ -54,7 +54,7 @@ function paintDarken (event) {
   let color = "#";
 
   // for each value, subtract, convert to hex, and append to color
-  for (let value in values) {
+  for (let value of values) {
     value -= 32;
     if (value < 0) value = 0; // check for negative values
     if (value < 16) {
@@ -86,7 +86,7 @@ function changeMode (event) {
     case "normal":
       newMode = paintBlack;
       break;
-    case "gradient":
+    case "shading":
       newMode = paintDarken;
       break;
     case "rainbow":
