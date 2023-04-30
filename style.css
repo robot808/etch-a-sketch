@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+div#board {
+  display: flex;
+  flex-direction: column;
+  width: 512px;
+  height: 512px;
+  padding: 0px;
+}
+
+div.row {
+  display: flex;
+  flex: 1 0 1px;
+}
+
+div.square {
+  background: #FFFFFF;
+  flex: 1 0 1px;
+}
